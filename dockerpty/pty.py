@@ -146,7 +146,7 @@ class RunOperation(Operation):
             pumps.append(io.Pump(pty_stderr, io.Stream(self.stderr), propagate_close=False))
 
         if not self._container_info()['State']['Running']:
-            self.client.start(self.container, **kwargs)
+            self.container.start(**kwargs)
 
         return pumps
 
@@ -175,9 +175,8 @@ class RunOperation(Operation):
 
         def attach_socket(key):
             if info['Config']['Attach{0}'.format(key.capitalize())]:
-                socket = self.client.attach_socket(
-                    self.container,
-                    {key: 1, 'stream': 1, 'logs': self.logs},
+                socket = self.container.attach_socket(
+                    params={key: 1, 'stream': 1, 'logs': self.logs}
                 )
                 stream = io.Stream(socket)
 
@@ -194,14 +193,14 @@ class RunOperation(Operation):
         """
         resize pty within container
         """
-        self.client.resize(self.container, height=height, width=width)
+        self.container.resize(height=height, width=width)
 
     def _container_info(self):
         """
         Thin wrapper around client.inspect_container().
         """
-
-        return self.client.inspect_container(self.container)
+        self.container.reload()
+        return self.container.attrs
 
 
 def exec_create(client, container, command, interactive=True):
