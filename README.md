@@ -1,3 +1,12 @@
+# Administrative Note:
+
+This code is not written by or maintained by Team ENVy. This is a fork created by deanrock, that has support for the latest Docker library version. It has been published on pypi as envy-project-dockerpty-republish.
+
+This re-publishing allows us to support installing ENVy using PyPi.
+
+Please contact us via the `envy-project/envy` repository regarding this fork.
+
+
 # Docker PTY
 
 Provides the functionality needed to operate the pseudo-tty (PTY) allocated to

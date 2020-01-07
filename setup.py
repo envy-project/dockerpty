@@ -26,10 +26,10 @@ def read(filename):
     return fopen(filename).read()
 
 setup(
-    name='dockerpty',
-    version='0.4.1',
-    description='Python library to use the pseudo-tty of a docker container',
-    long_description=read('README.md'),
+    name='envy-project-dockerpty-republish',
+    version='999.4.2',
+    description='Python library to use the pseudo-tty of a docker container republish by envy-project',
+    long_description='Republish of dockerpty by envy-project, who does not claim authorship',
     url='https://github.com/d11wtq/dockerpty',
     author='Chris Corbyn',
     author_email='chris@w3style.co.uk',
