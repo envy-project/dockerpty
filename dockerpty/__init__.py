@@ -35,13 +35,16 @@ def exec_command(
     """
     Run provided command via exec API in provided container.
 
-    This is just a wrapper for PseudoTerminal(client, container).exec_command()
+    This is just a wrapper for PseudoTerminal(client, container).exec_command().
+    Also returns the exit_code of the operation.
     """
     exec_id = exec_create(client, container, command, interactive=interactive)
 
     operation = ExecOperation(client, exec_id,
                               interactive=interactive, stdout=stdout, stderr=stderr, stdin=stdin)
     PseudoTerminal(client, operation).start()
+
+    return operation.exit_code()
 
 
 def start_exec(client, exec_id, interactive=True, stdout=None, stderr=None, stdin=None):
