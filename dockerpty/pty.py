@@ -275,6 +275,12 @@ class ExecOperation(Operation):
         """
         return self._exec_info()["ProcessConfig"]["tty"]
 
+    def exit_code(self):
+        """
+        returns the exit code of execed process if complete
+        """
+        return self.client.api.exec_inspect(self.exec_id)['ExitCode']
+
     def _exec_info(self):
         """
         Caching wrapper around client.exec_inspect
